@@ -149,7 +149,7 @@ let userCommands = {
     },
   kick:function(data){
       if(this.private.runlevel<3){
-          this.socket.emit('alert','admin=true')
+          this.socket.emit('alert','This Command Is Admin-only')
           return;
       }
         let pu = this.room.getUsersPublic()[data];
@@ -174,27 +174,36 @@ let userCommands = {
           css:txt.join(' ')
       })
   },
-    ban: function (data) {
-        if (this.private.runlevel < 3) {
-            this.socket.emit("alert", "admin=true");
+    ban:function(data){
+        if(this.private.runlevel<3){
+            this.socket.emit('alert','This command requires administrator privileges.')
             return;
         }
-        
-        let pu = this.room.getUsersPublic()[data];
-        if (pu && pu.color) {
+        let pu = this.room.getUsersPublic()[data]
+        if(pu&&pu.color){
             let target;
-            this.room.users.map((n) => {
-                if (n.guid == data) {
+            this.room.users.map(n=>{
+                if(n.guid==data){
                     target = n;
                 }
-            });
-                target.socket.emit("ban", {
-                    reason: "You got banned.",
-                });
+            })
+            if (target.getIp() == "::1") {
+                Ban.removeBan(target.getIp());
+            } else if (target.socket.request.connection.remoteAddress == "::ffff:127.0.0.1") {
+                Ban.removeBan(target.getIp());
+            } else {
+                if (target.private.runlevel > 2 && (this.getIp() != "::1" && this.getIp() != "::ffff:127.0.0.1")) {
+                    return;
+                } 
+                target.socket.emit("ban",{
+                    reason:"You got banned. You will no longer join any of the rooms until the ban expires."
+                })
                 target.disconnect();
                 target.socket.disconnect();
-        } else {
-            this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
+                Ban.addBan(target.getIp(), 24, "You got banned. You will no longer join any of the rooms unil the ban expires.");
+            }
+        }else{
+            this.socket.emit('alert','The user you are trying to ban left. Get dunked on nerd.')
         }
     },
   "unban": function(ip) {

@@ -86,6 +86,9 @@ window.onload = function(){
                     acid:{name:"Acid",callback:function(){theme('@keyframes sex{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}canvas{animation:sex 5s linear infinite}')}},
                     sacid:{name:"Super Acid",callback:function(){theme('@keyframes sex{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}body{animation:sex 1s linear infinite}')}},
                    terminal:{name:"TERMINAL",callback:function(){theme('.bubble,.bonzi_name,.bubble::after{background:0!important;border:0}*{color:green!important;font-family:monospace!important}#content{background:#000}.bubble-content::before{content:">"}.bonzi_name{padding:0;position:static}.bubble{overflow:visible}.bubble-left{right:0px}input[type=text]{background-color:#000;border:0}#chat_send,#chat_tray{display:none}#chat_bar{background:0}')}},
+                    galaxy:{name:"Galaxy",callback:function(){theme('#content{background:#000 url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'%3E%3Ccircle cx=\'10\' cy=\'10\' r=\'1\' fill=\'%23fff\'/%3E%3Ccircle cx=\'50\' cy=\'30\' r=\'1\' fill=\'%23fff\'/%3E%3Ccircle cx=\'80\' cy=\'60\' r=\'1\' fill=\'%23fff\'/%3E%3C/svg%3E");animation:stars 20s linear infinite}@keyframes stars{from{background-position:0 0}to{background-position:100px 100px}}*{color:#fff!important}')}},
+                    pastel:{name:"Pastel",callback:function(){theme('#content{background:linear-gradient(45deg,#ffd1dc,#ffabab,#ffc3a0,#ff677d)}*{color:#333!important}')}},
+                    midnight:{name:"Midnight",callback:function(){theme('body{background:#0f0f23}#content{background:#0f0f23}*{color:#cccccc!important}.bubble{background:#1a1a2e!important;border:1px solid #16213e!important}')}},
                 }
             },
             update:{
