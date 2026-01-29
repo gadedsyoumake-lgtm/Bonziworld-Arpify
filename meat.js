@@ -255,6 +255,21 @@ let userCommands = {
             target: sanitize(Utils.argsString(arguments))
         });
     },
+    rant: function() {
+        var target = sanitize(Utils.argsString(arguments));
+        var rants = [
+            target + " is the most annoying person I've ever met!",
+            target + " needs to stop being so annoying!",
+            "I can't stand " + target + " anymore!",
+            target + " is driving me crazy!",
+            "Why does " + target + " have to be like this?!",
+            target + " is absolutely insufferable!"
+        ];
+        this.room.emit("talk", {
+            text: rants[Math.floor(Math.random() * rants.length)],
+            guid: this.guid,
+        });
+    },
     "triggered": "passthrough",
     "vaporwave": function() {
         this.socket.emit("vaporwave");
